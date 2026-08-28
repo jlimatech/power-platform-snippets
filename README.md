@@ -4,8 +4,8 @@ Coleção de snippets úteis para **Power Automate** e **Power Fx** — express�
 
 ## 📂 Estrutura
 
-- [`power-fx/`](./power-fx) — Expressões e fórmulas Power Fx
-- [`power-automate/`](./power-automate) — Fluxos e expressões de Power Automate
+- [`power-fx/`](./power-fx) - Expressões e fórmulas Power Fx
+- [`power-automate/`](./power-automate) - Fluxos e expressões de Power Automate
 
 ## 📋 Índice de Snippets
 
