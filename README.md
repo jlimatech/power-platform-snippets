@@ -1,6 +1,6 @@
 # Power Platform Snippets
 
-Coleção de snippets úteis para **Power Automate** e **Power Fx** — expressões, fórmulas e fluxos reutilizáveis, prontos pra copiar e adaptar.
+Coleção de snippets úteis para **Power Automate** e **Power Fx** - expressões, fórmulas, conectores personalizados e fluxos reutilizáveis, prontos pra copiar e adaptar.
 
 ## 📂 Estrutura
 
