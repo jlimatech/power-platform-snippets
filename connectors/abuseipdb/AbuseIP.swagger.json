@@ -1,0 +1,89 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AbuseIPDB Check API",
+    "description": "Permite verificar histórico de abuso, pontuação de reputação e detalhes associados ao IP.",
+    "version": "1.0.0"
+  },
+  "host": "api.abuseipdb.com",
+  "basePath": "/api/v2",
+  "schemes": [
+    "https"
+  ],
+  "x-ms-connector-metadata": [
+    {
+      "propertyName": "Category",
+      "propertyValue": "Security"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/check": {
+      "get": {
+        "summary": "Obter informações sobre IP",
+        "description": "Retorna dados de reputação, reports e detalhes adicionais.",
+        "operationId": "ObterInfoIPv4",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "ipAddress",
+            "required": true,
+            "type": "string",
+            "x-ms-summary": "Endereço IP"
+          },
+          {
+            "in": "query",
+            "name": "maxAgeInDays",
+            "type": "integer",
+            "default": 30,
+            "x-ms-summary": "Máximo de Dias"
+          },
+          {
+            "in": "query",
+            "name": "verbose",
+            "type": "boolean",
+            "default": false,
+            "x-ms-summary": "Detalhado"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Informações sobre o IP consultado."
+          },
+          "400": {
+            "description": "Erro de validação."
+          },
+          "401": {
+            "description": "API Key inválida ou ausente."
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Key"
+    }
+  },
+  "security": [
+    {
+      "api_key": []
+    }
+  ],
+  "tags": []
+}
