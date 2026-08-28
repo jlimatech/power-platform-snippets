@@ -1,0 +1,74 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ALIEN VAULT OTX",
+    "description": "Conector do Alien Vault OTX para consulta de informações de IPs.",
+    "version": "1.0"
+  },
+  "host": "otx.alienvault.com",
+  "basePath": "/api",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/v1/indicators/IPv4/{IP}/general": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {}
+          }
+        },
+        "operationId": "ObterInfoIPv4",
+        "summary": "Obter informações de IPv4",
+        "description": "Obter informações sobre endereço IPv4",
+        "parameters": [
+          {
+            "name": "IP",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Endereço IPv4 a ser analisado",
+            "x-ms-visibility": "important",
+            "x-ms-summary": "Endereço IPv4"
+          },
+          {
+            "name": "X-OTX-API-KEY",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "YOUR_API_KEY",
+            "description": "API Key",
+            "x-ms-summary": "API Key",
+            "x-ms-visibility": "internal"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-visibility": "internal"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {},
+  "responses": {},
+  "security": [
+    {
+      "api_key": []
+    }
+  ],
+  "tags": [],
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-OTX-API-KEY"
+    }
+  }
+}
