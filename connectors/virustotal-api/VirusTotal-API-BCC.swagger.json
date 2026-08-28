@@ -1,0 +1,377 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "VirusTotal API",
+    "description": "API para consultar informações sobre IPs, domínios e hash de arquivos usando o serviço do VirusTotal.",
+    "contact": {
+      "name": "VirusTotal",
+      "url": "https://www.virustotal.com"
+    },
+    "version": "1.0.0"
+  },
+  "host": "www.virustotal.com",
+  "basePath": "/api/v3",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/ip_addresses/{ip}": {
+      "get": {
+        "summary": "Obter informações sobre IP",
+        "description": "Retorna um objeto de endereço IP com detalhes de reputação, localização e análises.",
+        "operationId": "getIPInfo",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ip",
+            "description": "Endereço IP a ser consultado",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Objeto de endereço IP retornado com sucesso",
+            "schema": {
+              "$ref": "#/definitions/IPAddress"
+            }
+          },
+          "404": {
+            "description": "IP não encontrado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "x-ms-openai-data": {
+          "openai-enabled": true,
+          "operations": [
+            {
+              "operationId": "getIpInfo",
+              "x-ms-require-user-confirmation": false,
+              "summary": "Obter informações sobre um endereço IP",
+              "description": "Retorna um objeto de endereço IP com detalhes de reputação, localização e análises."
+            }
+          ]
+        }
+      }
+    },
+    "/domains/{domain}": {
+      "get": {
+        "summary": "Obter informações sobre um domínio",
+        "description": "Retorna um objeto de domínio com informações de reputação, DNS, certificados e votos da comunidade.",
+        "operationId": "getDomainInfo",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "domain",
+            "description": "Nome do domínio a ser consultado",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Objeto de domínio retornado com sucesso",
+            "schema": {
+              "$ref": "#/definitions/Domain"
+            }
+          },
+          "404": {
+            "description": "Domínio não encontrado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "x-ms-openai-data": {
+          "openai-enabled": true,
+          "operations": [
+            {
+              "operationId": "getDomainInfo",
+              "x-ms-require-user-confirmation": false,
+              "summary": "Obter informações sobre um domínio",
+              "description": "Retorna um objeto de domínio com informações de reputação, DNS, certificados e votos da comunidade."
+            }
+          ]
+        }
+      }
+    },
+    "/files/{id}": {
+      "get": {
+        "summary": "Obter informações sobre um arquivo",
+        "description": "Retorna um objeto de arquivo com detalhes de hashes, reputação e resultados de análises.",
+        "operationId": "getFileInfo",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Identificador do arquivo (MD5, SHA1 ou SHA256)",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Objeto de arquivo retornado com sucesso",
+            "schema": {
+              "$ref": "#/definitions/File"
+            }
+          },
+          "404": {
+            "description": "Arquivo não encontrado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "x-ms-openai-data": {
+          "openai-enabled": true,
+          "operations": [
+            {
+              "operationId": "getFileInfo",
+              "x-ms-require-user-confirmation": false,
+              "summary": "Obter informações sobre um arquivo",
+              "description": "Retorna um objeto de arquivo com detalhes de hashes, reputação e resultados de análises."
+            }
+          ]
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IPAddress": {
+      "type": "object",
+      "properties": {
+        "as_owner": {
+          "type": "string"
+        },
+        "asn": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "continent": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "network": {
+          "type": "string"
+        },
+        "reputation": {
+          "type": "integer"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "total_votes": {
+          "type": "object",
+          "properties": {
+            "harmless": {
+              "type": "integer"
+            },
+            "malicious": {
+              "type": "integer"
+            }
+          }
+        },
+        "last_analysis_stats": {
+          "type": "object",
+          "properties": {
+            "harmless": {
+              "type": "integer"
+            },
+            "malicious": {
+              "type": "integer"
+            },
+            "suspicious": {
+              "type": "integer"
+            },
+            "undetected": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "Domain": {
+      "type": "object",
+      "properties": {
+        "categories": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "creation_date": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "jarm": {
+          "type": "string"
+        },
+        "reputation": {
+          "type": "integer"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "total_votes": {
+          "type": "object",
+          "properties": {
+            "harmless": {
+              "type": "integer"
+            },
+            "malicious": {
+              "type": "integer"
+            }
+          }
+        },
+        "last_analysis_stats": {
+          "type": "object",
+          "properties": {
+            "harmless": {
+              "type": "integer"
+            },
+            "malicious": {
+              "type": "integer"
+            },
+            "suspicious": {
+              "type": "integer"
+            },
+            "undetected": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "File": {
+      "type": "object",
+      "properties": {
+        "md5": {
+          "type": "string"
+        },
+        "sha1": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string"
+        },
+        "size": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "type_description": {
+          "type": "string"
+        },
+        "reputation": {
+          "type": "integer"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "total_votes": {
+          "type": "object",
+          "properties": {
+            "harmless": {
+              "type": "integer"
+            },
+            "malicious": {
+              "type": "integer"
+            }
+          }
+        },
+        "last_analysis_stats": {
+          "type": "object",
+          "properties": {
+            "harmless": {
+              "type": "integer"
+            },
+            "malicious": {
+              "type": "integer"
+            },
+            "suspicious": {
+              "type": "integer"
+            },
+            "undetected": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "responses": {},
+  "security": [
+    {
+      "api_key": []
+    }
+  ],
+  "tags": [],
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "x-apikey"
+    }
+  },
+  "x-ms-openai-manifest": {
+    "humanName": "VirusTotal API",
+    "modelDescription": "API para consultar informações sobre IPs, domínios e hash de arquivos usando o serviço do VirusTotal.",
+    "contactEmail": "",
+    "legalUrl": ""
+  }
+}
